@@ -17,7 +17,6 @@ public class Body {
     private Vector v;      // velocity
     private final double mass; // mass
     private final double rad; //radius
-    private final double radius; //the hight and width of the frame of the Universe.
 
     /**
      * puts the instance values into the parameter.
@@ -28,18 +27,14 @@ public class Body {
      * @param rad get the value of the constant rad.
      * @param radius get the value of the constant radius.
      */
-    public Body(Vector r, Vector v, double mass, double rad, double radius) {
+    public Body(Vector r, Vector v, double mass, double rad) {
         this.r = r;
         this.v = v;
         this.mass = mass;
         this.rad = rad;
-        this.radius = radius;
     } // Body( Vector, Vector, double mass, rad)
 
-    public void move(Vector f, double dt,double radius) {
-        if(radius == r[0]||radius == r[1]){
-            
-        }
+    public void move(Vector f, double dt) {
         Vector a = f.times(1/mass);
         v = v.plus(a.times(dt));
         r = r.plus(v.times(dt));
