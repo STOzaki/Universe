@@ -25,7 +25,6 @@ public class Body {
      * @param v gets the values of the constant v.
      * @param mass get the value of the constant mass.
      * @param rad get the value of the constant rad.
-     * @param radius get the value of the constant radius.
      */
     public Body(Vector r, Vector v, double mass, double rad) {
         this.r = r;
