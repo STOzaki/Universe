@@ -30,6 +30,11 @@ public class Universe {
     private String title;
     public double pause;
     // read universe from file
+    
+    /* Takes the text file you have and then pushes it into a new object called
+    *  orbs.  Also adds the raduius of the Universe as one of its perameters.
+    *
+    */
     public Universe(String fileName) {
 
         // the authors' version reads from standard input
@@ -59,7 +64,6 @@ public class Universe {
             int green = inputStream.readInt();
             int blue = inputStream.readInt();
             int[] c ={red,green,blue};
-//            massive[i] = mass;
             double[] position = {rx, ry};
             double[] velocity = {vx, vy};
             Vector r = new Vector(position);
@@ -70,7 +74,6 @@ public class Universe {
 
     // increment time by dt units, assume forces are constant in given interval
     public void increaseTime(double dt) {
-//test
         // initialize the forces to zero
         Vector[] f = new Vector[N];
         for (int i = 0; i < N; i++) {
