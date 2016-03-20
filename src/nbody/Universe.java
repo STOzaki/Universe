@@ -2,6 +2,7 @@ package nbody;
 
 import edu.princeton.cs.In;
 import edu.princeton.cs.StdDraw;
+import java.awt.Color;
 
 /**
  * ****************************************************************************
@@ -25,7 +26,9 @@ public class Universe {
     private final double radius;     // radius of universe
     private final int N;             // number of bodies
     private final Body[] orbs;       // array of N bodies
-
+    private double[] massive; // initializing massive
+    private String title;
+    public double pause;
     // read universe from file
     public Universe(String fileName) {
 
@@ -40,7 +43,9 @@ public class Universe {
         radius = inputStream.readDouble();
         StdDraw.setXscale(-radius, +radius);
         StdDraw.setYscale(-radius, +radius);
-
+        inputStream.readLine();
+        title = inputStream.readLine();
+        System.out.println(title);
         // read in the N bodies
         orbs = new Body[N];
         for (int i = 0; i < N; i++) {
@@ -50,11 +55,16 @@ public class Universe {
             double vy = inputStream.readDouble();
             double mass = inputStream.readDouble();
             double rad = inputStream.readDouble();
+            int red = inputStream.readInt();
+            int green = inputStream.readInt();
+            int blue = inputStream.readInt();
+            int[] c ={red,green,blue};
+//            massive[i] = mass;
             double[] position = {rx, ry};
             double[] velocity = {vx, vy};
             Vector r = new Vector(position);
             Vector v = new Vector(velocity);
-            orbs[i] = new Body(r, v, mass,rad);
+            orbs[i] = new Body(r, v, mass,rad,c,radius,title);
         } // for
     } // Universe()
 
@@ -88,14 +98,34 @@ public class Universe {
             orbs[i].draw();
         } // for
     } // draw()
-
-    // client to simulate a universe
+    
+    /* Launching the simulation for a universe.
+    *
+    *  Drawing the background, and setting the time
+    *  then use the draw function to make the image.
+    *  And, the world will keep refreshing itself for all time.
+    *  In addiiton, if you press the button 't', you can stop time.
+    */
     public static void main(String[] args) {
         Universe newton = new Universe( args[1] );
         double dt = Double.parseDouble(args[0]);
         while (true) {
-            StdDraw.clear();
+            StdDraw.clear(StdDraw.BLACK);
             newton.increaseTime(dt);
+            if(StdDraw.hasNextKeyTyped()){
+                if(StdDraw.nextKeyTyped() == 't'){
+                    if(newton.pause > 0){
+                    dt = newton.pause;
+                    newton.pause = 0;
+                }
+                    else{
+                    newton.pause = dt;
+                    dt = 0;
+                    }
+                }
+                
+            }
+            
             newton.draw();
             StdDraw.show(10);
         } // while
