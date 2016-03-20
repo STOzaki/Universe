@@ -70,7 +70,7 @@ public class Universe {
 
     // increment time by dt units, assume forces are constant in given interval
     public void increaseTime(double dt) {
-
+//test
         // initialize the forces to zero
         Vector[] f = new Vector[N];
         for (int i = 0; i < N; i++) {
