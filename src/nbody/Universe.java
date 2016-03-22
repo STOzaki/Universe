@@ -29,6 +29,7 @@ public class Universe {
     private double[] massive; // initializing massive
     private String title;
     public double pause;
+    private double tlength;
     // read universe from file
     
     /* Reads the file given and stores all of the elements in its respective 
@@ -46,11 +47,12 @@ public class Universe {
 
         // the set scale for drawing on screen
         radius = inputStream.readDouble();
-        StdDraw.setXscale(-radius, +radius);
-        StdDraw.setYscale(-radius, +radius);
+        StdDraw.setXscale(-radius, + radius);
+        StdDraw.setYscale(-radius, + radius);
         inputStream.readLine();
         title = inputStream.readLine();
-        System.out.println(title);
+        tlength = inputStream.readDouble();
+        
         // read in the N bodies
         orbs = new Body[N];
         for (int i = 0; i < N; i++) {
@@ -68,16 +70,20 @@ public class Universe {
             double[] velocity = {vx, vy};
             Vector r = new Vector(position);
             Vector v = new Vector(velocity);
-            orbs[i] = new Body(r, v, mass,rad,c,radius,title);
+            orbs[i] = new Body(r, v, mass,rad,c,radius,title,tlength);
         } // for
     } // Universe()
 
-    /*increment time by dt units, assume forces are constant in given interval.
-    * so it creates Vectors for the number of bodies of planets or stars.  Then
-    * a new object is made by Vector and stored in the Vector f.  After it 
-    * calculates the force the new force is adds that number to f.  Finally,
-    * the bodies or body are moved to the spot they need to be.
-    */
+    /**
+     * @param dt use this to determine how fast it moves.
+     * 
+     * increment time by dt units, assume forces are constant in given interval.
+     * so it creates Vectors for the number of bodies of planets or stars.  Then
+     * a new object is made by Vector and stored in the Vector f.  After it 
+     * calculates the force the new force is adds that number to f.  Finally,
+     * the bodies or body are moved to the spot they need to be.
+     */
+
     public void increaseTime(double dt) {
         // initialize the forces to zero
         Vector[] f = new Vector[N];
@@ -94,13 +100,16 @@ public class Universe {
             } // for
         } // for
 
-        // move the bodies
+        // move the bodies and check wether they have hit the sides.
         for (int i = 0; i < N; i++) {
+            orbs[i].repel(radius);
             orbs[i].move(f[i], dt);
         } // for
     } // increaseTime( double )
 
-    // draw the N bodies
+    /**
+     * draw the N bodies
+     */
     public void draw() {
         for (int i = 0; i < N; i++) {
             orbs[i].draw();
@@ -108,7 +117,7 @@ public class Universe {
     } // draw()
     
     /* Launching the simulation for a universe.
-    *
+    
     *  Drawing the background, and setting the time
     *  then use the draw function to make the image.
     *  And, the world will keep refreshing itself for all time.
@@ -130,9 +139,14 @@ public class Universe {
                     newton.pause = dt;
                     dt = 0;
                     }
-                }
-                
-                
+//                }
+//                if(StdDraw.nextKeyTyped() == 'f'){
+//                  dt = dt + 1000;  
+//                }
+//                if(StdDraw.nextKeyTyped()  == 's'){
+//                    dt = dt - 1000;
+//                
+                }                
             }
             
             newton.draw();

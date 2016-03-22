@@ -104,6 +104,14 @@ public class Vector {
             c.data[i] = this.data[i] + that.data[i];
         return c;
     } // plus( Vector )
+    
+    public void xrepel(){
+        data[0] = data[0] * -0.8;
+    }
+    
+    public void yrepel(){
+        data[1] = data[1] * -0.8;
+    }
 
     // return this - that
     public Vector minus(Vector that) {
