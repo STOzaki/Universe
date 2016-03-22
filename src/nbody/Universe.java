@@ -31,9 +31,9 @@ public class Universe {
     public double pause;
     // read universe from file
     
-    /* Takes the text file you have and then pushes it into a new object called
-    *  orbs.  Also adds the raduius of the Universe as one of its perameters.
-    *
+    /* Reads the file given and stores all of the elements in its respective 
+    * values.  Then thoses values are used to make an orbit for however many
+    * planets you asked.
     */
     public Universe(String fileName) {
 
@@ -72,7 +72,12 @@ public class Universe {
         } // for
     } // Universe()
 
-    // increment time by dt units, assume forces are constant in given interval
+    /*increment time by dt units, assume forces are constant in given interval.
+    * so it creates Vectors for the number of bodies of planets or stars.  Then
+    * a new object is made by Vector and stored in the Vector f.  After it 
+    * calculates the force the new force is adds that number to f.  Finally,
+    * the bodies or body are moved to the spot they need to be.
+    */
     public void increaseTime(double dt) {
         // initialize the forces to zero
         Vector[] f = new Vector[N];
@@ -126,6 +131,7 @@ public class Universe {
                     dt = 0;
                     }
                 }
+                
                 
             }
             
