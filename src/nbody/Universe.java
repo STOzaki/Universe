@@ -147,7 +147,6 @@ public class Universe {
                     }
                 }                
             }
-            
             newton.draw();
             StdDraw.show(10);
         } // while
