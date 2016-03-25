@@ -5,7 +5,6 @@
  */
 package nbody;
 
-import edu.princeton.cs.StdDraw;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -18,19 +17,31 @@ public class BodyTest {
     public BodyTest() {
     }
 //
-//    /**
-//     * Test of move method, of class Body.
-//     */
-//    @Test
-//    public void testMove() {
-//        System.out.println("move");
-//        Vector f = null;
-//        double dt = 0.0;
-//        Body instance = null;
-//        instance.move(f, dt);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of move method, of class Body.
+     */
+    @Test
+    public void testMove() {
+        Vector f = new Vector(new double[]{5.0, 0.0});
+        double dt = 1;
+        Body instance = new Body(
+                new Vector(new double[]{0.0, 0.0}),
+                new Vector(new double[]{0.0, 0.0}),
+                10,
+                0.02,
+                new int[]{255, 150, 250},
+                200000,
+                "Testing",
+                50,
+                0.9);
+        instance.move(f, dt);
+        Vector expResult = new Vector(new double[]{0.5,0});
+        Vector result = instance.getPosition();
+        assertEquals(expResult.cartesian(0),result.cartesian(0), 0.0000001);
+        assertEquals(expResult.cartesian(1),result.cartesian(1), 0.0000001);
+        
+        
+    }
 //
 //    /**
 //     * Test of update method, of class Body.
@@ -60,20 +71,28 @@ public class BodyTest {
 //        fail("The test case is a prototype.");
 //    }
 //
-//    /**
-//     * Test of repel method, of class Body.
+    /**
+     * Test of repel method, of class Body.
 //     */
 //    @Test
 //    public void testRepel() {
-//        System.out.println("repel");
 //        double radius = 0.0;
-//        Body instance = null;
+//        
+//        Body instance = new Body(
+//                new Vector(new double[]{-5.0e10,-2.0e10}),
+//                new Vector(new double[]{5.0e04,0.0e00}),
+//                3.0e28,
+//                0.02,
+//                new int[]{255, 150, 250},
+//                200000,
+//                "Testing",
+//                50,
+//                0.9);
 //        instance.repel(radius);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        
 //    }
-//
-//    /**
+////
+////    /**
 //     * Test of drawtrail method, of class Body.
 //     */
 //    @Test
@@ -106,5 +125,9 @@ public class BodyTest {
 //        Body instance = new Body();
 //        instance.draw(penRadius);
 //    }
+
+    private void String(String testing) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
